@@ -1,0 +1,87 @@
+/*
+ *     Open Fonts - Open Font License
+ *
+ *
+ *  'Cabin Sketch'
+ *  'Carter One'
+ *  'Creepster'
+ *  'Tai Heritage Pro'
+ *  Tapestry
+ *  Griffy
+ *  
+ */
+
+
+
+@font-face {
+  font-family: 'Cabin Sketch';
+  src: url('CabinSketch-Regular.ttf');
+}
+body {
+  font-family: 'Cabin Sketch', cursive;
+}
+@font-face {
+  font-family: 'Cabin Sketch';
+  src: url('CabinSketch-Bold.ttf');
+}
+body {
+  /* NOTE: We can use the same font-family name for BOLD version. CSS will use the appropriate font file */
+  font-family: 'Cabin Sketch', cursive;
+  font-weight: bold;
+}
+
+
+@font-face {
+    font-family: 'Carter One';
+    src: url('CarterOne-Regular.ttf');
+}
+body {
+    font-family: 'Carter One', cursive;
+}
+
+
+@font-face {
+    font-family: 'Creepster';
+    src: url('Creepster-Regular.ttf');
+}
+body {
+    font-family: 'Creepster', cursive;
+}
+
+
+@font-face {
+    font-family: 'Tai Heritage Pro';
+    src: url('TaiHeritagePro-Regular.ttf');
+}
+body {
+    font-family: 'Tai Heritage Pro', serif;
+}
+@font-face {
+    /* NOTE: We can use the same font-family name for BOLD version. CSS will use the appropriate font file */
+    font-family: Tai Heritage Pro';
+    src: url('TaiHeritagePro-Bold.ttf');
+    font-weight: bold;
+}
+body {
+    font-family: 'Tai Heritage Pro', serif;
+    font-weight: bold;
+}
+
+
+@font-face {
+    font-family: Tapestry;
+    src: url('Tapestry-Regular.ttf');
+}
+body {
+    font-family: 'Tapestry', cursive;
+}
+
+
+@font-face {
+    font-family: Griffy;
+    src: url('Griffy-Regular.ttf');
+}
+body {
+  font-family: 'Griffy', cursive;
+}
+

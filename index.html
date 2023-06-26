@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <title>Photo Collage</title>
+
+    <link rel="icon" href="icons/favicon-32x32.png">             <!-- Browser tab favicon -->
+    <link rel="shortcut icon" href="icons/favicon-32x32.png">    <!-- Android shortcut icon -->
+    <link rel="apple-touch-icon" href="icons/favicon-32x32.png"> <!-- Apple shortcut icon -->
+
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="author" content="Ray Wallace">
+    <meta name="description" content="">
+    <meta name="keywords" content=",">
+
+    <!-- Load our .css style files -->
+    <link rel="stylesheet" href="css/main.css">
+
+    <!-- MINIMUM NEEDED -- Load some Javascript Functions -->
+    <script defer src="javascript_libraries/canvas.js"></script>
+    <script defer src="javascript_libraries/helpers.js"></script>
+    <script defer src="javascript_libraries/files.js"></script>
+    <!-- Load some Javascript Functions -->
+    <script defer src="javascript_libraries/full_screen.js"></script>
+    <script defer src="javascript_libraries/dialog_box.js"></script> <!-- AFTER helpers.js -->
+
+    <!-- Load Javascript Files -->
+    <script defer src="javascript/collage.js"></script>
+    <script defer src="javascript/main.js"></script>
+  </head>
+
+
+  <body>
+    <div class="AllContent">
+
+      <header>
+        <!-- JS change this TITLE to the <title> from above -->
+        <h1>TITLE</h1>
+      </header>
+
+
+      <div class="Nav">
+        <div>
+          <button type="button" onclick="loadOnClick(event)">Load</button>
+          <button type="button" onclick="saveOnClick(event)">Save</button>
+        </div>
+        <div>
+          <button type="button" onclick="helpOnClick(event)">Help</button>
+        </div>
+      </div>
+
+
+
+
+      <div class="StatusArea">
+        <div id="StatusID">
+          Starting up
+        </div>
+
+        <div class="SliderContainer">
+          <label for="SliderID">Percentage</label> 0<input id="SliderID" type="range" min="0" max="100" value="0">100 <span id="SliderValueID"></span>
+        </div>
+      </div>  <!-- End StatusArea -->
+
+
+      <section class="ContentArea">
+        <!-- <p> PLACE CANVAS OR OTHER CONTENT HERE </p> -->
+      </section>  <!-- End ContentArea -->
+
+
+      <footer>
+        <!-- javascript inserts a year range in the <time> tag -->
+        <span>Copyright &copy; <time class="Year" datetime="2022">2022</time> </span>
+        <a href="https://www.facebook.com/HoudiniJr/photos_by"><img src="icons/facebook_logo.png" alt="Icon">Facebook</a>
+        <span><span class="Email"><a onclick="houdini(event)" href=
+            "mailto:Ray@RipsPics.com?bcc=HoudiniJr@GMail.com&subject=RipsPics%20website"
+          target="_blank" title="Website Query">Ray@RipsPics.com</a></span> <span class="Version"></span></span>
+      </footer>
+
+    </div>  <!-- End AllContent -->
+
+  </body>
+</html>

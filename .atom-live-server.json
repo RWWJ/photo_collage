@@ -1,0 +1,3 @@
+{
+  "ignore": "images,./Images,./images,./Temp,./temp,/databases,./**/*.js"
+}

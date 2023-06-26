@@ -1,0 +1,414 @@
+/*
+ *      main.css
+ *
+ *  Version 1.1
+ *
+ *  29 Nov 2022  Changed header and header h1 colors
+ *               Moved .Toggled to header instead of h1. Can control colors on both that way
+ *  26 Apr 2023  Added code, kbd, samp, underline
+ *  27 Apr 2023  Tweaked slider
+ *
+ */
+
+
+* {
+  box-sizing: border-box;
+  margin: 0px;
+  padding: 0px;
+  /* border: 0px; NOTE: Do NOT zero out border, it breaks <hr> */
+}
+
+/* Load some extra fonts */
+@font-face {
+  font-family: "Creepy";
+  src: url("../fonts/creepy.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Fredericka";
+  src: url("../fonts/FrederickatheGreat-Regular.ttf");
+}
+@font-face {
+  /* All caps. Ok for a page header */
+  /* NOTE Needs good letter-spacing, like 0.2rem or 0.3 */
+  font-family: 'Luckiest Guy';
+  src: url( "../fonts/LuckiestGuy-regular.ttf" )
+}
+
+
+.Houdini {
+  outline: solid 4px var(--HarleyOrange);
+  color: red;
+}
+
+
+canvas {
+  /* Canvas are inline, so they take up space below them, like text does to leave space for descenders.
+   * Fix with EITHER vertical-align:bottom; OR position:absolute;
+   */
+  vertical-align: bottom;
+  /* position: absolute; */
+
+  box-shadow: 0px 0px 10px black;
+}
+
+
+html {
+  /* These fonts seem to be standard on most Operating Systems */
+  --FancyFont: "Calisto MT", "Lucida Bright", Lucidabright, Georgia, "Times New Roman", serif;
+  --NiceFont: 'Trebuchet MS', "Lucida Sans", Verdana, sans-serif;
+  --SharpFont: "Century Gothic", CenturyGothic, AppleGothic, sans-serif;
+  --CursiveFont: 'Brush Script MT', 'Brush Script Std', cursive; /* Hard to read, not on Cell phones */
+  --MonoSpaceFont: "DejaVu Sans Mono", "Courier New", monospace;
+  --FantasyFont: "Comic Sans MS", "Comic Relief", Papyrus, Sans-serif;
+  --CleanFont: "URW Gothic L", sans-serif;
+  --FunFont: Fredericka, serif;
+
+
+  /* Fonts we have loaded with @font-face */
+  --CreepyFont: "Creepy";
+  --HeaderFont: "Luckiest Guy", cursive; /* Add font-spacing:0.2rem; */
+
+
+  /* Color variable definitions */
+  --DarkestColor: #8C5426;
+  --DarkerColor: #a0522d; /* Sienna; */
+  --DarkColor: #dCa476;
+  --MediumColor: #d2b48c; /* tan; */
+  --NormalColor: blanchedalmond;
+  --LightColor: beige;
+  --LightestColor: white;
+  --SkyBlue: SkyBlue; /* #87CEEB hsl(197, 71%, 72%) */
+  --HarleyOrange: #c93413;
+
+  /* Pastel Colors */
+  --Pastel_DarkestColor: gray;
+  --Pastel_DarkerColor: DarkKhaki;
+  --Pastel_DarkColor: skyblue;
+  --Pastel_NormalColor: khaki;
+  --Pastel_LightColor: PINK;
+  --Pastel_LightestColor: papayaWhip;
+
+  /* Misc colors */
+  --LightMint: hsl(180,60%,45%);
+  --Mint: hsl(180,70%,30%);
+  --DarkMint: hsl(180,80%,15%);
+
+
+  font-size: 16px;  /* rem is always based on the <html> font size. Browsers generaly use 16 */
+}
+
+body {
+  /* border: solid 2px red; */
+
+  /* font-family: var(--FancyFont); */
+  /* font-family: var(--NiceFont); */
+  /* font-family: var(--SharpFont); */
+  /* font-family: var(--CursiveFont); */
+  font-family: var(--FantasyFont);
+
+  background-color: var(--NormalColor);
+
+  max-width: 100%;  /* NOTE: Fixes horizontal scroll bar being created JUST when there is a vertical scroll bar */
+
+  line-height: 1.24rem;
+}
+
+
+.AllContent {
+  /* border: solid 2px orange; */
+  position: relative;
+
+  min-height: 100vh;   /* Starts full window */
+  height: max-content; /* But can grow with content to taller than window */
+
+  display: grid;
+  grid-template-areas:
+              "Header"
+              "Menu"
+              "Status"
+              "Content"
+              "Footer";
+  /* Let horizontal re-size while maxing out at 1024px */
+  /* grid-template-columns: minmax(0px, 1024px); */
+  grid-template-columns: 100%;
+  /*                   Header,     Menu,            Status,        Content, Footer */
+  /* grid-template-rows: 80px   max-content   minmax(0, max-content) auto  max-content; */
+  grid-template-rows: max-content max-content minmax(0, max-content) auto  max-content;
+
+  justify-content: center; /* center our layout horizontally, IF it does not fill the screen width */
+  /* align-content: center; /* stretch is the default */
+}
+
+
+header {
+  grid-row: Header;
+
+  height: 2rem;
+
+  background-color: var(--MediumColor);
+
+  box-shadow: inset 2px 2px 3px var(--NormalColor), inset -2px -2px 3px var(--DarkColor);
+  border-radius: 4px;
+
+  display: grid;
+  align-items: center;     /* Vertical */
+  justify-content: center; /* Horizontal */
+}
+header h1 {
+  color: var(--NormalColor);
+
+  font-family:  var(--FantasyFont);
+  font-size: 1.5rem;
+  font-weight: 600;
+  text-shadow: 2px 3px 5px black;
+  text-transform: uppercase;
+}
+header.Paused {
+  background-color: var(--NormalColor);
+}
+header.Paused h1::after, header.Paused h1::before {
+  position: absolute;
+  content: "*** PAUSED ***";
+  color: var(--DarkestColor);
+  background-color: var(--MediumColor);
+  border-radius: 0.75rem;
+  padding: 0px 0.5rem;
+}
+header.Paused h1::before {
+  left: 4%;
+}
+header.Paused h1::after {
+  right: 4%;
+}
+
+
+nav, .Nav {
+  background-color: var(--MediumColor);
+  box-shadow: inset 2px 2px 3px var(--NormalColor), inset -2px -2px 3px var(--DarkColor);
+
+  padding: 2px 10px;
+
+  grid-row: Menu;
+
+  display: grid; /* So we can move some menus to the right side */
+  grid-template-columns: 1fr max-content;
+}
+nav a {
+  padding: 0rem 1rem;
+  text-decoration: none;
+  box-shadow: 1px 1px 3px var(--DarkestColor);
+}
+
+.CurrentMenu {
+  background-color: var(--NormalColor);
+}
+
+
+.StatusArea {
+  /* background-color: cyan; */
+  box-shadow: inset 2px 2px 3px tan, inset -2px -2px 3px tan;
+
+  padding: 6px 10px;
+
+  grid-row: Status;
+  align-self: center; /* Vertically in grid space */
+  /*justify-self: center; /* Horizontally in grid space */
+}
+#StatusID {
+  /* background-color: yellow; */
+  height: 40px;
+  line-height: 1.0rem;
+
+  overflow-y: auto;
+  padding: 10px;
+}
+
+.ContentArea {
+  /* border: solid 2px blue; */
+  box-shadow: inset 2px 2px 3px tan, inset -2px -2px 3px tan;
+
+/*  padding: 6px 10px;*/ /* Makes horizontal scroll bar */
+
+  font: 18px  var(--SharpFont);
+
+  grid-row: Content;
+}
+
+
+footer {
+  background-color: var(----LightColor);
+
+  grid-row: Footer; /* Going to end up there by default anyway */
+
+  padding: 2px 10px 3px;
+
+  font-size: 0.8rem;  /* Make the same as img width */
+
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+}
+footer img {
+  width: 0.8rem;  /* Make the same as font-size */
+}
+footer a {
+  margin: 0 auto; /* Center Facebook link */
+}
+
+
+Button {
+  text-decoration: none;
+  border-radius: 0.4rem;
+  box-shadow: 2px 2px 2px rgba(8, 59, 42, 0.96);
+
+  margin: 4px;
+  padding: 2px 3px;
+  cursor: pointer;
+}
+Button:hover {
+  opacity: .5;
+}
+
+
+
+code, kbd, samp {
+  display: block;
+}
+code, kbd, samp, var {
+  background-color: rgb(210,210,210);
+  background-image: linear-gradient(rgb(255,255,255), rgb(210,210,210));  /* Give area a vague beveled look */
+  border-color: rgb(192,192,192) rgb(200,200,200) rgb(200,200,200) rgb(192,192,192);
+  border-width: 1px;
+  border-style: solid;
+  border-radius: 0.2rem;
+  /* margin: 0rem 0.5rem; */
+  padding: 0rem 0.5rem;
+}
+code {
+  font-family: "Courier New", monospace;  /* Courier New is monospace */
+  white-space: pre-wrap;       /* Just pre if you don't want long lines to wrap */
+}
+kbd::before {
+  content: "> ";
+}
+samp::before {
+  content: ": ";
+}
+var {
+  background-color: rgb(200,200,200);
+}
+kbd {
+    /* background-image: linear-gradient(#F1F1F1, #DDDDDD); */
+    line-height: 40px;
+}
+
+
+
+
+#StatusID {
+  /* background-color: gray; */
+
+  /* text-align: center; */
+}
+
+
+.Container {
+  position: relative;
+}
+
+
+.SliderContainer {
+  background-color: var(--DarkColor);
+  box-shadow: inset 0px 0px 8px var(--NormalColor); /* Softens the edge */
+  border-radius: 6px;
+
+  width: max-content;
+  padding: 2px 20px;
+}
+.SliderContainer > input[type=range] {
+  margin: 0px 3px;
+
+  vertical-align: middle;  /* Move the min&max numbers up even with slider */
+  padding: 3px 0px;  /* left&right cause the slider to STOP at those limits on Chrome */
+
+  cursor: pointer;
+
+  appearance: none; /* NOTE IMPORTANT Need this else the settings below have no effect */
+    background: var(--NormalColor);
+    height: 1.1rem;
+    border-radius: 8px;
+}
+.SliderContainer > label {
+  margin-left: 6px;
+  margin-right: 0.7rem;
+}
+.SliderValue {
+  border-radius: 4px;
+
+  margin-left: 6px;
+  margin-right: 30px;
+}
+
+
+
+.Hidden, .HideContent {
+  display: none;
+}
+
+
+hr.Fancy {
+  border: solid 1px gray;
+  margin: 5px;
+  border-top: 3px double #333;
+}
+
+
+.Smiley {
+  /* color: orange; */
+  font-size: 26px;
+}
+
+
+.ColorfullBorder {
+  border-block-start: solid 4px var(--MediumColor);
+  border-inline-end: solid 4px var(--LightColor);
+  border-block-end: solid 4px var(--DarkestColor);
+  border-inline-start: solid 4px var(--DarkColor);
+}
+
+
+.Underline {
+  border-bottom: solid 1px black;
+}
+
+
+
+/* Arrows (triangles),
+ * Down Solid \25bc, Down Hollow \25bd
+ * Left Solid \25c0, Left Hollow \25c1
+ * Right Solid \25b7, Right Hollow \25b6
+ * uP Solid \25b3, uP Hollow \25b2
+ *
+ * DOWN ARROW. The html escape chars do NOT work here &dArr; or &#8595;
+ */
+.UpArrow::before {
+  content: "\25b2";
+  margin-right: 4px;
+}
+.DownArrow::before {
+  content: "\25bC";
+  margin-right: 4px;
+}
+.LeftArrow::before {
+  content: "\25C0";
+  margin-right: 4px;
+}
+.RightArrow::before {
+  content: "\25b7";
+  margin-right: 4px;
+}
+
+
+
+
+
+/*  */

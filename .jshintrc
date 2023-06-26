@@ -1,0 +1,37 @@
+//
+//  RWWJ .jshintrc config file for Atom's linter jshint plugin
+//
+//  See full list of options (i.e. example .jshintrc file) at:
+//    https://github.com/jshint/jshint/blob/main/examples/.jshintrc
+//
+//  See jshint docs at:
+//    https://jshint.com/docs/
+//    https://jshint.com/docs/options/
+//
+
+
+//       NOTE NOTE NOTE   Must use capital W to disable Warnings    "-W0##":true    NOTE NOTE NOTE
+
+
+{
+  "esversion": 13,  // {int} Specify the ECMAScript version to which the code must adhere
+  "browser": true,  // Web Browser (allows window, document, etc) --- NEED If you use "undef" below
+  "devel": true,    // Development/debugging (alert, confirm, etc) --- NEED If you use "undef" below
+//  "node": true,     // Allows some node specific "globals"
+//  "undef": true,    // Require variable declaration. NOTE: See "browser", "devel" and "node" above. NO NO FAILS on functions defined in other .js files (i.e. that are included in your .html file)
+  "boss": true,     // Tolerate assignments where comparisons would be expected
+  "expr": true,     // Stop complaints about use of expressions in some places (where an assignment is more likely to occur)
+  "debug": true,    // Allow debugger statements e.g. browser breakpoints
+  "loopfunc": true, // same as "-W083" Suppress warnings about functions inside of loops
+  "asi": true,      // Disable ; semicolon check (same as "-W033"). ASI = Automatic Semicolon Insertion
+  "eqnull": true,   // Tolerate use of '== null' comparision instead of '=== null'
+  "-W014": true,    // Disable "Misleading line break before ||, readers may interpret this as an expression bounary"
+  "-W018": true,    // Disable "Confusing use of '!'"
+  "-W024": true,
+//  "-W033": true,    // Same as "asi" above. Disable no ; semicolon complaint
+  "-W078": true,    // Disable "Setter is defined without getter"
+//  "-W083": true,    // Same as "loopfunc" above
+  "-W084": true,    // Allow assignments where conditional expected. e.g. if( result=status() ) ...
+  "strict": false
+}
+

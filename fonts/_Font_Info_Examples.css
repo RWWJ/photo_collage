@@ -1,0 +1,57 @@
+
+
+
+/*      ============= FONTS ============      */
+
+
+/* Define the fonts, associate a family name with a source
+
+@font-face {
+  font-family: "Creepy";
+  src: url("../Fonts/Creepy.woff2") format("woff2")
+}
+
+@font-face {
+  font-family: "Lunacy";
+  src: url("../Fonts/Lunacy.woff2") format("woff2")
+}
+
+@font-face {
+  font-family: Indie Flower
+  src: url("../Fonts/IndieFlower-Regular.ttf")
+}
+
+@font-face {
+  font-family: "Fredericka";
+  src: url("../fonts/FrederickatheGreat-Regular.ttf");
+}
+
+
+
+/* USEAGE EXAMPLES */
+
+header {
+  font-family:  Creepy,        serif;
+
+  font-family:  Lunacy,        serif;
+
+  font-family: 'Indie Flower', cursive;
+
+  font-family:  Fredericka,    serif;
+
+
+}
+
+
+
+/* Use the font on any element with the BigCreepyFont class */
+.BigCreepyFont {
+  font-family: Creepy, serif;
+
+  color: #FF6D00;
+  font-weight: normal;
+  text-align: center;
+  font-size: 3.5em;
+}
+
+
