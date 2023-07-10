@@ -12,17 +12,32 @@
 //  27 Apr 2023 Added some helpful comments
 //   6 Jun 2023 Changed so CanvasObj is not a global
 //  25 Jun 2023 Fix test rectangle draw on Canvas to use .addObj() do draw it every frame so it is visible
+//              Changed initCanvas() to set font & size to something larger than default
+//  29 Jun 2023 Changed initSlider() to only call user function if not null
+//              Added UseSliderValue and use thereof
 
 
-
-const Version = "V1.05";
+const Version = "V1.06";
 
 const FirstYear = "2023";
 
 
+//    Functions and globals
+//
+//  sliderValue( )
+//  status( text )
+//  UseSliderValue    // Set to a function to be called with slider value when it changes
+//  Paused            // Toggled by ^P (Ctrl-P)
+//  Houdini           // Toggled by Alt-click on EMail address in Footer
+//  MouseX            // Relative to document. Use Canvas .mouse.x for relative to Canvas
+//  MouseY            // Relative to document. Use Canvas .mouse.y for relative to Canvas
+
+
+var UseSliderValue = null;  // Set this to a function that you want called with slider value when it changes
+
 var Houdini = false;  // Toggled by Alt-click on EMail address in Footer
 
-let Paused = false; // Toggled by ^P (Ctrl-P)
+let Paused = false;   // Toggled by ^P (Ctrl-P)
 
 var StatusElement = document.getElementById( "StatusID" );
 
@@ -64,17 +79,9 @@ function init( ) {
   document.addEventListener( "mousemove" , event => { MouseX = event.pageX; MouseY = event.pageY;} )
 
   // Allow for easily adding more sliders
-  initSlider( "SliderID", "SliderValueID", useSliderValue );
+  initSlider( "SliderID", "SliderValueID" );
 
   canvasObj = initCanvas( );
-  // Quick Canvas test draw
-  canvasObj.strokeStyle = "blue";
-  canvasObj.lineWidth = "4";
-  canvasObj.addObj(null, _ => {
-    canvasObj.font =  "16px sans-serif";
-    canvasObj.strokeRect( 0, 0, canvasObj.width-1, canvasObj.height-1 );
-    canvasObj.fillText( "Use .addObj() to draw on Canvas", 100, 100 )
-  });
 
   addEventListener( "keydown", event => {
     if( event.code === "KeyP" && event.ctrlKey && !event.repeat ) {
@@ -108,7 +115,8 @@ function togglePaused( ) {
 }
 
 
-function initSlider( sliderId, valueId, useValueCallback ) {
+
+function initSlider( sliderId, valueId ) {
   let sliderElement = document.getElementById( sliderId );
   let sliderValueElement = document.getElementById( valueId );
 
@@ -118,13 +126,13 @@ function initSlider( sliderId, valueId, useValueCallback ) {
     else value = sliderElement.value;
 
     sliderValueElement.innerText = `{${value}}`;
-    useValueCallback( value ); // Initial slider value
+    if( UseSliderValue ) UseSliderValue( value ); // Initial slider value
 
     // input is an active event (fires as slider is moving)
     sliderElement.addEventListener( "input", event => {
       value = event.target.value;
       sliderValueElement.innerText = `  {${value}}`;
-      useValueCallback( value );
+      if( UseSliderValue ) UseSliderValue( value );
     } );
 
     // change event only fires when slider stops moving, so good time to store value in localStorage
@@ -135,14 +143,6 @@ function initSlider( sliderId, valueId, useValueCallback ) {
   }
 }
 
-
-
-//
-// Likely you would move this to your implementation javascript file and customize it appropriately
-//
-function useSliderValue( value ) {
-  console.log( `Slider value = ${value}` );
-}
 
 
 function sliderValue( ) {
@@ -162,7 +162,11 @@ function status( text ) {
 
 
 function initCanvas( ) {
-  return new Canvas( document.querySelector(".ContentArea") );
+  let canvas = new Canvas( document.querySelector(".ContentArea") );
+
+  canvas.font =  "16px sans-serif";
+
+  return canvas;
 }
 
 

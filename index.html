@@ -16,10 +16,12 @@
     <meta name="keywords" content=",">
 
     <!-- Load our .css style files -->
+    <link rel="stylesheet" href="css/collage.css">
     <link rel="stylesheet" href="css/main.css">
 
     <!-- MINIMUM NEEDED -- Load some Javascript Functions -->
     <script defer src="javascript_libraries/canvas.js"></script>
+    <script defer src="javascript_libraries/math.js"></script>
     <script defer src="javascript_libraries/helpers.js"></script>
     <script defer src="javascript_libraries/files.js"></script>
     <!-- Load some Javascript Functions -->
@@ -27,6 +29,7 @@
     <script defer src="javascript_libraries/dialog_box.js"></script> <!-- AFTER helpers.js -->
 
     <!-- Load Javascript Files -->
+    <script defer src="javascript/fileList.js"></script>
     <script defer src="javascript/collage.js"></script>
     <script defer src="javascript/main.js"></script>
   </head>
@@ -45,24 +48,30 @@
         <div>
           <button type="button" onclick="loadOnClick(event)">Load</button>
           <button type="button" onclick="saveOnClick(event)">Save</button>
+
+          <button class="Default" type="button" onclick="displayOnClick(event)">Display</button>
+          <button class="Default" type="button" onclick="reverseOnClick(event)">Reverse</button>
+          <button class="Default" type="button" onclick="randomOnClick(event)">Random</button>
+          <button class="Default" type="button" onclick="rotateOnClick(event)">Rotate</button>
+<br>
+          Border <input type="checkbox" onclick="borderOnClick(event)">
+          Thickness <input type="number" value="4" min=0 max=64 step=2 oninput="thicknessOnInput(event)">
+          <input type="color" value="#0f0f0f" oninput="colorOnInput(event)">
+          Image Width<input type="number" value="64" min=8 max=512 step=8 oninput="widthOnInput(event)">
+
+          <div class="SliderContainer">
+            <label for="SliderID">Percentage</label> 0<input id="SliderID" type="range" min="0" max="100" value="0">100 <span id="SliderValueID"></span>
+          </div>
+
         </div>
         <div>
-          <button type="button" onclick="helpOnClick(event)">Help</button>
+          <!-- <button type="button" onclick="helpOnClick(event)">Help</button> -->
         </div>
       </div>
 
 
 
 
-      <div class="StatusArea">
-        <div id="StatusID">
-          Starting up
-        </div>
-
-        <div class="SliderContainer">
-          <label for="SliderID">Percentage</label> 0<input id="SliderID" type="range" min="0" max="100" value="0">100 <span id="SliderValueID"></span>
-        </div>
-      </div>  <!-- End StatusArea -->
 
 
       <section class="ContentArea">
