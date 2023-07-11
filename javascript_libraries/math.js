@@ -12,13 +12,14 @@
 //               V1.4
 //  21 Apr 2023  Added vectorSub( ), improved lerp()
 //               V1.5
-//  25 Apr 2023  Added stdNormalDistribution( x ) 
+//  25 Apr 2023  Added stdNormalDistribution( x )
 //               V1.6
+//  29 Jun 2023  Added midPoint( )
+//               V1.7
 
 
 
-
-var MathJsVersion = "1.6";
+var MathJsVersion = "1.7";
 
 
 
@@ -34,6 +35,7 @@ var MathJsVersion = "1.6";
 // setLength( point, len )
 // setMagnitude( point, len )
 // distance( point1, point2 )
+// midPoint( point1, point2 )
 // normalize( point )
 // vectorAdd( point1, point2 )
 // vectorSub( point1, point2 )
@@ -44,7 +46,7 @@ var MathJsVersion = "1.6";
 // lerp( start, end, where )
 // inverseLerp( start, end, value )
 // stdNormalDistribution( x )
-// 
+//
 
 
 
@@ -101,19 +103,53 @@ let setMagnitude = setLength;
 
 
 //
-// Distance between two points, either 2d or 3d (with or without z)
+// Distance between two 2d points
 //
-// point1 and point2 are [] (i.e. [x,y] or [x,y,Z])
+// point1 and point2 are {} (i.e. {x,y})
+//
+// NOTE: This function used to take arrays. I changed it to take objects {x,y} to be consistant with all the other functions here.
+//       Also I seperated out the 2d and 3d versions
 //
 function distance( point1, point2 ) {
-  let dist = 0;
+  let difference = point1.x - point2.x;
+  let dist = difference * difference; // Squared
 
-  for( let dimension = 0; dimension < point1.length(); ++dimension ) {
-    let difference = point1[dimension] - point2[dimension];
-    dist += difference * difference; // Squared
-  }
+  difference = point1.y - point2.y;
+  dist += difference * difference; // Squared
 
   return Math.sqrt( dist );
+}
+
+
+//
+// Distance between two 3d points
+//
+// point1 and point2 are {} (i.e. {x,y,z})
+//
+function distance3d( point1, point2 ) {
+  let difference = point1.x - point2.x;
+  let dist = difference * difference; // Squared
+
+  difference = point1.y - point2.y;
+  dist += difference * difference; // Squared
+
+  difference = point1.z - point2.z;
+  dist += difference * difference; // Squared
+
+  return Math.sqrt( dist );
+}
+
+
+
+//
+// The point (i.e. {x,y}) midway between two points
+//
+// point1 and point2 (i.e. {x,y}, {x,y})
+//
+function midPoint( point1, point2 ) {
+  let sum = vectorAdd( point1, point2 );
+
+  return vectorDivideBy( sum, 2 );
 }
 
 

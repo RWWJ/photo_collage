@@ -4,12 +4,15 @@
 node_modules/
 jspm_packages/
 
+# RWWJ Project specific
+images/
+javascript_libraries/
 
 # RWWJ
-StagingArea
-Staging
-staging
-stagingArea
+StagingArea/
+Staging/
+staging/
+stagingArea/
 desktop.ini
 
 # Dippy Windows files

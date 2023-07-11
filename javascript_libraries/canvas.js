@@ -52,6 +52,8 @@
 //               ReWrote clearRect() to be just that (i.e. the same as canvas clearRect() )
 //               ReWrote clear(), but it still has the same functionality (i.e. clear canvas (clear screen) )
 //               v2.2
+//  26 Jun 2023  Change _animate() to do nothing if animate objects queue is empty (i.e. don't clear canvas)
+//               v2.3
 
 
 
@@ -319,7 +321,7 @@ class Canvas {
 
   //
   // Just the bare ends of lines
-  //
+  //   butt, round, square
   // NOTE: See lineJoin for shape of touching line ends
   //
   set lineCap( style ) {
@@ -334,8 +336,9 @@ class Canvas {
 
   //
   // Just the ends of lines that touch
+  //  round, bevel, miter
   //
-  // NOTE: See lineEnd for shape of bare ends
+  // NOTE: See lineCap for shape of bare ends
   //
   set lineJoin( style ) {
     return this.canvas.lineJoin = style;
@@ -952,7 +955,8 @@ class Canvas {
 
 
   _animate( ms ) {
-    if( !Paused ) {
+    // Let the canvas be used for static drawing, if nothing is in the animate object queue
+    if( !Paused && this._animateQue.length ) {
       this._moveObjs( ms );
       this._drawObjs();
     }
@@ -975,4 +979,3 @@ class Canvas {
 
 
 //
-
